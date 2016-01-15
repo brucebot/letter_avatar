@@ -1,4 +1,6 @@
 require "letter_avatar/colors"
+require 'chinese_pinyin'
+
 
 module LetterAvatar
   class Avatar
@@ -16,9 +18,10 @@ module LetterAvatar
         attr_accessor :color, :letter
 
         def self.from_username(username)
+
           identity = new
           identity.color = LetterAvatar::Colors.for(username)
-          identity.letter = username.first.upcase
+          identity.letter = Pinyin.t(username,splitter:'').first.upcase
 
           identity
         end
